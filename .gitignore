@@ -1,0 +1,48 @@
+# Environments and secrets
+.venv/
+env/
+venv/
+.env
+
+# Data and experiment runs
+data/
+runs/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Large binary models, embeddings, indexes, and tables
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.faiss
+*.index
+*.parquet
+*.sqlite
+*.sqlite3
+*.db
+*.pkl
+*.pickle
+*.so
+*.dylib
+*.dll
+
+# Testing and linting caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Operating system artifacts
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# IDE configuration
+.vscode/
+.idea/
