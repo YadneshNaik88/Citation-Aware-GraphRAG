@@ -40,8 +40,22 @@ CANONICAL_ROOT_FILES = [
     "Makefile",
     "CHANGELOG.md",
     "OPEN_QUESTIONS.md",
+    "pyproject.toml",
     "requirements.txt",
     "requirements-lock.txt",
+]
+
+CANONICAL_DOC_FILES = [
+    "docs/ARCHITECTURE.md",
+    "docs/PROTOCOL.md",
+    "docs/PHASE_0_PROMPTS.md",
+    "docs/ENVIRONMENT_NOTES.md",
+]
+
+FORBIDDEN_ROOT_DUPLICATE_FILES = [
+    "ARCHITECTURE.md",
+    "PROTOCOL.md",
+    "PHASE_0_PROMPTS.md",
 ]
 
 
@@ -51,6 +65,15 @@ def check_forbidden_folders(root_dir: Path) -> list[str]:
     for folder in FORBIDDEN_COMPETING_FOLDERS:
         if (root_dir / folder).is_dir():
             found.append(folder)
+    return found
+
+
+def check_forbidden_root_duplicates(root_dir: Path) -> list[str]:
+    """Return any forbidden duplicate documentation files found in root_dir."""
+    found = []
+    for filename in FORBIDDEN_ROOT_DUPLICATE_FILES:
+        if (root_dir / filename).is_file():
+            found.append(filename)
     return found
 
 
@@ -70,19 +93,42 @@ def test_canonical_directories_exist() -> None:
 
 
 def test_canonical_root_files_exist() -> None:
-    """Assert required root files and documents exist."""
+    """Assert required root files exist."""
     repo_root = Path(__file__).resolve().parent.parent
 
     for filename in CANONICAL_ROOT_FILES:
         f = repo_root / filename
         assert f.is_file(), f"Canonical root file missing: {filename}"
 
-    # Documentation in docs/
-    assert (repo_root / "docs" / "ARCHITECTURE.md").is_file(), "docs/ARCHITECTURE.md is missing"
-    assert (repo_root / "docs" / "PROTOCOL.md").is_file(), "docs/PROTOCOL.md is missing"
-    assert (repo_root / "docs" / "ENVIRONMENT_NOTES.md").is_file(), (
-        "docs/ENVIRONMENT_NOTES.md is missing"
+
+def test_canonical_doc_files_exist() -> None:
+    """Assert canonical documentation exists only inside docs/."""
+    repo_root = Path(__file__).resolve().parent.parent
+
+    for doc_path in CANONICAL_DOC_FILES:
+        f = repo_root / doc_path
+        assert f.is_file(), f"Canonical doc file missing: {doc_path}"
+
+
+def test_no_duplicate_root_docs() -> None:
+    """Assert duplicate copies of docs do not exist at repository root."""
+    repo_root = Path(__file__).resolve().parent.parent
+    duplicates = check_forbidden_root_duplicates(repo_root)
+    assert not duplicates, (
+        f"Forbidden duplicate documentation files found in repository root: {duplicates}. "
+        "Canonical documentation must reside solely inside docs/."
     )
+
+
+def test_layout_fails_if_duplicate_root_docs_added(tmp_path: Path) -> None:
+    """Verify that adding duplicate docs to root is caught and causes layout test failure."""
+    for duplicate_name in FORBIDDEN_ROOT_DUPLICATE_FILES:
+        fake_file = tmp_path / duplicate_name
+        fake_file.write_text("duplicate", encoding="utf-8")
+
+    duplicates = check_forbidden_root_duplicates(tmp_path)
+    for duplicate_name in FORBIDDEN_ROOT_DUPLICATE_FILES:
+        assert duplicate_name in duplicates, f"Failed to detect root duplicate: {duplicate_name}"
 
 
 def test_no_competing_folders() -> None:

@@ -6,12 +6,13 @@ This document tracks items that cannot be verified from documentation or tests, 
 
 ### T0.1 Repository Skeleton
 - **Status:** Resolved / Verified.
-- **Python version:** Python 3.13 selected and verified compatible with PyTorch 2.13.0, FAISS-CPU 1.15.1, DuckDB 2.0.0, Polars 2.1.0, Transformers 4.57.6, and Adapters 1.3.0.
-- **Unresolved questions for T0.1:** None.
+- **Python version:** Python 3.13 pinned as baseline. Dry-run dependency resolution and isolated wheel imports verified for planned packages.
+- **T0.3 Planning Note:** Full end-to-end runtime compatibility of the combined `torch` + `transformers` + `adapters` + `faiss-cpu` stack remains to be empirically verified during the T0.3 installation and benchmark.
+- **PyTorch Installation Strategy:** Proposal to keep platform-specific PyTorch builds outside the cross-platform lockfile (using environment-specific requirement files) is pending team approval.
 
 ---
 
-## Active Open Questions for Upcoming Tasks (from PROTOCOL.md Section 11)
+## Active Open Questions for Upcoming Tasks (from docs/PROTOCOL.md Section 11)
 
 1. **[?] T0.2 API Pilot Questions:**
    - Grouping support on `primary_topic.id`, `primary_topic.subfield.id`, `topics.id`, and `publication_year`.
@@ -25,4 +26,3 @@ This document tracks items that cannot be verified from documentation or tests, 
 3. **[?] Project Decisions Requiring Sign-off:**
    - Hosted-app API budget (free allowance, prepaid, or hard cap).
    - Seed subfields and domain readers for evaluation.
-

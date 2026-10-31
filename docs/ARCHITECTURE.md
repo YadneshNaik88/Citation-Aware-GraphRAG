@@ -335,12 +335,12 @@ Planned endpoints: `POST /search`, `POST /synthesize`, `GET /trends`, `GET /tren
 This is the **only** canonical layout. Do not create alternative folders (for example `config/`, `source/`, `notebooks/` as a code location, `utils/`, `data_raw/`). A new top-level folder requires a `CHANGELOG.md` entry approved by a reviewer, and `tests/test_repo_layout.py` enforces the list below.
 ```
 project/
-  AGENTS.md  .gitignore  .python-version  .env.example  Makefile  CHANGELOG.md  OPEN_QUESTIONS.md
+  AGENTS.md  .gitignore  .python-version  .env.example  Makefile  CHANGELOG.md  OPEN_QUESTIONS.md  pyproject.toml
   requirements.txt          # exact pins for direct dependencies
   requirements-lock.txt     # full resolved environment, generated (see AGENTS.md section 4)
   .agents/rules/            # short rule files for Antigravity (see AGENTS.md)
   configs/                  # pipeline, thresholds, budgets (no secrets)
-  docs/                     # ARCHITECTURE.md, PROTOCOL.md, results_notes/, annotation/
+  docs/                     # ARCHITECTURE.md, PROTOCOL.md, PHASE_0_PROMPTS.md, results_notes/, annotation/
   src/{data,kg,embed,topics,forecast,rag,verify,gaps,app,common}/
   tests/
   scripts/

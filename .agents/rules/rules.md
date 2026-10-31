@@ -5,6 +5,6 @@ Before any task, read and follow:
 1. `AGENTS.md` (root)
 2. `docs/ARCHITECTURE.md`
 3. `docs/PROTOCOL.md`
+4. `docs/PHASE_0_PROMPTS.md`
 
 All guidelines in `AGENTS.md` are mandatory and non-negotiable.
-

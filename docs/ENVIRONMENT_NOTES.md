@@ -8,7 +8,7 @@
 
 ## Package Wheel Verification Evidence
 
-In accordance with AGENTS.md Section 4 and PHASE_0_PROMPTS.md T0.1, the Python minor version was selected after verifying that wheels exist and resolve cleanly for all planned downstream libraries:
+In accordance with AGENTS.md Section 4 and docs/PHASE_0_PROMPTS.md T0.1, the Python minor version was selected after verifying that wheels exist and resolve cleanly for all planned downstream libraries:
 
 | Package | Resolved Version | Wheel Architecture / ABI | Compatibility Verification |
 |---|---|---|---|
@@ -19,6 +19,17 @@ In accordance with AGENTS.md Section 4 and PHASE_0_PROMPTS.md T0.1, the Python m
 | `transformers` | 4.57.6 | `transformers-4.57.6-py3-none-any.whl` | Universal wheel (`py3-none-any`); resolved via pip dry-run resolver without conflict |
 | `adapters` | 1.3.0 | `adapters-1.3.0-py3-none-any.whl` | Universal wheel (`py3-none-any`); resolved via pip dry-run resolver without conflict |
 
+## Downstream Compatibility and PyTorch Planning
+
+### 1. T0.3 Full Package Combination Compatibility
+While preliminary dry-run resolution and isolated wheel imports succeed under Python 3.13, full runtime compatibility of the combined heavy stack (`torch` + `transformers` + `adapters` + `faiss-cpu`) remains to be established during the actual installation and sustained throughput benchmark in task T0.3. Python 3.13 remains pinned as the baseline pending those benchmark results.
+
+### 2. Proposed PyTorch Installation Architecture
+Because PyTorch builds are strictly hardware- and OS-dependent (e.g., CUDA compute versions on Linux, CPU-only wheels on Windows, MPS on macOS), pinning an exact platform wheel in a single universal `requirements-lock.txt` can break cross-platform portability.
+
+- **Proposed Strategy:** Keep platform-specific PyTorch builds outside the shared cross-platform lock file. Provide environment-specific installation recipes (e.g., `requirements-torch-cpu.txt`, `requirements-torch-cuda.txt`) separately pinned and documented per build environment.
+- **Status:** Planning only; not implemented without formal team review and approval.
+
 ## Dependency Management Policy
 
 1. **Virtual Environment:** Every team member operates within the isolated `.venv` directory created by `make setup`.
@@ -28,4 +39,3 @@ In accordance with AGENTS.md Section 4 and PHASE_0_PROMPTS.md T0.1, the Python m
 3. **Hardware Agnosticism:**
    - The repository operates out of the box on CPU.
    - `scripts/env_report.py` dynamically probes whether CUDA, ROCm, or Apple MPS accelerators are available without hardcoding assumptions.
-
