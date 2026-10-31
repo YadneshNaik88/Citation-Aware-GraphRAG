@@ -13,3 +13,4 @@ All notable changes, protocol revisions, and layout adjustments to this project 
 - Environment reporting tool `scripts/env_report.py` and unit test `tests/test_env_report.py`.
 - Repository layout test `tests/test_repo_layout.py` ensuring canonical directories exist and forbidding competing directories.
 - GitHub Actions CI workflow in `.github/workflows/ci.yml`.
+

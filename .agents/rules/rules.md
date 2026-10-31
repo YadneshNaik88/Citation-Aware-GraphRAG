@@ -7,3 +7,4 @@ Before any task, read and follow:
 3. `docs/PROTOCOL.md`
 
 All guidelines in `AGENTS.md` are mandatory and non-negotiable.
+

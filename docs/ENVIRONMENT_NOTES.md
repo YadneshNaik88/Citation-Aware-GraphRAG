@@ -3,7 +3,7 @@
 ## Python Minor Version Selection
 
 - **Selected Version:** Python 3.13 (pinned in `.python-version` as `3.13`)
-- **Host Testing Environment:** Python 3.13.14 (64-bit) on Windows 11 AMD64
+- **Host Testing Environment:** Python 3.13.14 (64-bit) on Windows 10 (version 10.0.19045, AMD64; platform `Windows-10-10.0.19045-SP0`)
 - **Date Verified:** October 2026
 
 ## Package Wheel Verification Evidence
@@ -28,3 +28,4 @@ In accordance with AGENTS.md Section 4 and PHASE_0_PROMPTS.md T0.1, the Python m
 3. **Hardware Agnosticism:**
    - The repository operates out of the box on CPU.
    - `scripts/env_report.py` dynamically probes whether CUDA, ROCm, or Apple MPS accelerators are available without hardcoding assumptions.
+

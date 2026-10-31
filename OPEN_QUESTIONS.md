@@ -25,3 +25,4 @@ This document tracks items that cannot be verified from documentation or tests, 
 3. **[?] Project Decisions Requiring Sign-off:**
    - Hosted-app API budget (free allowance, prepaid, or hard cap).
    - Seed subfields and domain readers for evaluation.
+
