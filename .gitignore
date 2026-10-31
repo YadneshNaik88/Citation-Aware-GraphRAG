@@ -1,12 +1,12 @@
 # Environments and secrets
-.venv/
-env/
-venv/
+/.venv/
+/env/
+/venv/
 .env
 
-# Data and experiment runs
-data/
-runs/
+# Data and experiment runs (root only)
+/data/
+/runs/
 
 # Python cache and bytecode
 __pycache__/
@@ -46,4 +46,3 @@ ehthumbs.db
 # IDE configuration
 .vscode/
 .idea/
-
