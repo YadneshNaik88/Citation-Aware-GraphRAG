@@ -28,7 +28,7 @@ lint:
 	$(VENV_PYTHON) -m ruff format --check .
 
 leakage:
-	@echo Leakage audit skeleton placeholder (to be implemented in T0.4)
+	@$(SYSTEM_PYTHON) -c "print('Leakage audit skeleton placeholder (to be implemented in T0.4)')"
 
 lock:
 	$(SYSTEM_PYTHON) -c "import shutil; shutil.rmtree('.venv_lock', ignore_errors=True)"
